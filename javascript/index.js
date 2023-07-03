@@ -60,43 +60,69 @@ getInstruction("mashedPotatoes", 4, (step4) => {
 // Iteration 2 - using promises
 obtainInstruction("steak", 0)
   .then((step0) => {
-  document.querySelector("#steak").innerHTML += `<li>${step0}</li>`;
-    //console.log(step0);
-    return obtainInstruction('steak',1);
+    document.querySelector("#steak").innerHTML += `<li>${step0}</li>`;
+    console.log(step0);
+    return obtainInstruction("steak", 1);
   })
+  .catch((error) => {
+    console.log(error);
+  })
+
   .then((step1) => {
-  document.querySelector("#steak").innerHTML += `<li>${step1}</li>`;
-    //console.log(step1);
-    return obtainInstruction('steak',2);
+    document.querySelector("#steak").innerHTML += `<li>${step1}</li>`;
+    console.log(step1);
+    return obtainInstruction("steak", 2);
   })
+  .catch((error) => {
+    console.log(error);
+  })
+
   .then((step2) => {
-  document.querySelector("#steak").innerHTML += `<li>${step2}</li>`;
-   //console.log(step2);
-   return obtainInstruction('steak',3);
+    document.querySelector("#steak").innerHTML += `<li>${step2}</li>`;
+    console.log(step2);
+    return obtainInstruction("steak", 3);
   })
-  .then( (step3) => {
-  document.querySelector("#steak").innerHTML += `<li>${step3}</li>`;
-   //console.log(step3);
-   return obtainInstruction('steak',4);
+  .catch((error) => {
+    console.log(error);
   })
-  .then( (step4) => {
-  document.querySelector("#steak").innerHTML += `<li>${step4}</li>`;
-   //console.log(step4);
-   return obtainInstruction('steak',5);
+
+  .then((step3) => {
+    document.querySelector("#steak").innerHTML += `<li>${step3}</li>`;
+    console.log(step3);
+    return obtainInstruction("steak", 4);
   })
-  .then( (step5) => {
-  document.querySelector("#steak").innerHTML += `<li>${step5}</li>`;
-   //console.log(step5);
-   return obtainInstruction('steak',6);
+  .catch((error) => {
+    console.log(error);
   })
-  .then( (step6) => {
-  document.querySelector("#steak").innerHTML += `<li>${step6}</li>`;
-  document.querySelector("#steak").innerHTML += `<li>Steak is ready!</li>`;
-   //console.log(step6);
-   return obtainInstruction('steak',7);
+
+  .then((step4) => {
+    document.querySelector("#steak").innerHTML += `<li>${step4}</li>`;
+    console.log(step4);
+    return obtainInstruction("steak", 5);
   })
-  
-  //.catch((error) => {console.log(error)});
+  .catch((error) => {
+    console.log(error);
+  })
+
+  .then((step5) => {
+    document.querySelector("#steak").innerHTML += `<li>${step5}</li>`;
+    console.log(step5);
+    return obtainInstruction("steak", 6);
+  })
+  .catch((error) => {
+    console.log(error);
+  })
+
+  .then((step6) => {
+    document.querySelector("#steak").innerHTML += `<li>${step6}</li>`;
+    document.querySelector("#steak").innerHTML += `<li>Steak is ready!</li>`;
+    console.log(step6);
+    return obtainInstruction("steak", 7);
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+ 
   
 
 
@@ -105,6 +131,7 @@ obtainInstruction("steak", 0)
 // Iteration 3 using async/await
 const makeBroccoli= async () => {
   try {
+
     const step0 = await obtainInstruction("broccoli",0);
     document.querySelector("#broccoli").innerHTML += `<li>${step0}</li>`;
     const step1 = await obtainInstruction("broccoli", 1);
@@ -120,15 +147,45 @@ const makeBroccoli= async () => {
     const step6 = await obtainInstruction("broccoli", 6);
     document.querySelector("#broccoli").innerHTML += `<li>${step6}</li>`;
     document.querySelector("#broccoli").innerHTML += `<li>Broccoli is ready!</li>`;
-    
-
-
-
+ 
   } catch (error) {console.log(error)};
-
-
 }
+
 makeBroccoli();
 
 
 // Bonus 2 - Promise all
+/*
+const cookingPromises = brusselsSprouts.map((_,Indexed) => {
+  return obtainInstruction(Indexed);
+});*/
+
+const promises = brusselsSprouts.map((item) =>{
+  return item;
+});
+
+Promise.all(promises)
+.then((values) => {
+  console.log("values", values);
+  values.forEach((value) => {
+  document.querySelector("#brusselsSprouts").innerHTML += `<li>${value}</li>`;
+  })
+})
+.catch((error) => console.log(error));
+
+
+/*
+document.querySelector("#broccoli").innerHTML += `<li>${values}</li>`;
+
+const cookingPromises = brusselsSprouts.map((_,Indexed) => {
+  return obtainInstruction(Indexed);
+});
+
+Promise.all(cookingPromises)
+  .then((arrayofValues) => {
+    console.log(arrayofValues);
+  })
+  .catch((error) => console.log(error));
+
+  obtainInstruction();
+  */
