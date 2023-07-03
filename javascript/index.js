@@ -155,37 +155,39 @@ makeBroccoli();
 
 
 // Bonus 2 - Promise all
-/*
-const cookingPromises = brusselsSprouts.map((_,Indexed) => {
-  return obtainInstruction(Indexed);
-});*/
-
-const promises = brusselsSprouts.map((item) =>{
-  return item;
-});
-
-Promise.all(promises)
-.then((values) => {
-  console.log("values", values);
-  values.forEach((value) => {
-  document.querySelector("#brusselsSprouts").innerHTML += `<li>${value}</li>`;
-  })
-})
-.catch((error) => console.log(error));
-
 
 /*
-document.querySelector("#broccoli").innerHTML += `<li>${values}</li>`;
+note to self: 
+V1 if each element in the array is a promise.
 
-const cookingPromises = brusselsSprouts.map((_,Indexed) => {
-  return obtainInstruction(Indexed);
-});
-
-Promise.all(cookingPromises)
-  .then((arrayofValues) => {
-    console.log(arrayofValues);
+Promise.all(brusselsSprouts)
+  .then((values) => {
+    console.log("values", values);
+    values.forEach((value) => {
+      document.querySelector("#brusselsSprouts").innerHTML += `<li>${value}</li>`;
+    });
   })
   .catch((error) => console.log(error));
+*/
 
-  obtainInstruction();
-  */
+/*
+  note to self: 
+  V2 map each element in the brusselsSprouts 
+  array to a resolved promise using Promise.resolve().
+  this is due to this being a normal array 
+  and not an array of promises.(in that case use V1).
+*/                  
+
+  const promises = brusselsSprouts.map((item) => {
+    return Promise.resolve(item);
+  });
+
+  Promise.all(promises)
+    .then((values) => {
+      console.log("values", values);
+      values.forEach((value) => {
+        document.querySelector("#brusselsSprouts").innerHTML += `<li>${value}</li>`;
+      });
+    })
+    .catch((error) => console.log(error));
+
